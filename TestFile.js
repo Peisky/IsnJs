@@ -1,0 +1,2 @@
+var token = "@@@";
+alert(token);
