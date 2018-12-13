@@ -1,5 +1,5 @@
 var token = "@@@";
-	
+alert(token);
 function init() {
 	var bootstrapcdn  = document.createElement('link');
 	bootstrapcdn.link= 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css';
