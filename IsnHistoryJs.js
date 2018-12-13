@@ -1,5 +1,5 @@
 var token = "@@@";
-alert(token);
+	
 function init() {
 	var bootstrapcdn  = document.createElement('link');
 	bootstrapcdn.link= 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css';
@@ -7,7 +7,7 @@ function init() {
 	bootstrapcdn.integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u";
 	bootstrapcdn.crossorigin="anonymous";
 	var bootstrapjscdn  = document.createElement('link');
-	bootstrbootstrapjscdnapcdn.link= 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css';
+	bootstrapjscdn.link= 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css';
 	bootstrapjscdn.rel="stylesheet";
 	bootstrapjscdn.integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u";
 	bootstrapjscdn.crossorigin="anonymous";
@@ -37,71 +37,71 @@ function init() {
 
 
 
-	function GetHistroyList(month) {
-		var url = 'http://www.isn99.com/membersite-api/api/statement/list/' + date + '?_=' + new Date();
+function GetHistroyList(month) {
+	var url = 'http://www.isn99.com/membersite-api/api/statement/list/' + date + '?_=' + new Date();
 
-		$.ajax({
-			type: 'GET',
-			url: url,
-			headers: {
-				"Authorization": "Bearer " + token,
+	$.ajax({
+		type: 'GET',
+		url: url,
+		headers: {
+			"Authorization": "Bearer " + token,
+		}
+	}).done(function (data) {
+
+
+
+
+	});
+
+}
+
+function Login(){
+	var logindata = {username:"g8g8g8g8",password:"qq2222"};
+	var url = 'http://www.isn99.com/membersite-api/api/member/authenticate';
+	$.ajax({
+		type: 'POST',
+		url: url,
+		data:logindata,
+		})
+		.done(function (data) {
+			if(data.success){
+				alert(data.responseMessage);
+			}else{
+				token = data.token;
 			}
-		}).done(function (data) {
+		});
+}
 
+function GetHistory(date) {
+	var url = 'http://www.isn99.com/membersite-api/api/statement/list/' + date + '?_=' + new Date();
 
-
-
+	$.ajax({
+		type: 'GET',
+		url: url,
+		headers: {
+			"Authorization": "Bearer " + token,
+		}
+	}).done(function (data) {
+		$("#historybody").html("");
+		$.each(data, function (index, obj) {
+			var tr = $("<tr></tr>")
+			.append("<td>" + index + "</td>")
+			.append("<td>" + obj.betDateServer + "<br/>編號:" + obj.betId + "</td>")
+			.append("<td>" + obj.marketTypeName + "</td>")
+			.append("<td>" + obj.leagueName + "<br/>" + obj.eventName + "<br/>" + obj.name + "[" + obj.handicap + "]@" + obj.odds + "</td>")
+			.append("<td>" + obj.stake + "</td>")
+			.append("<td>" + obj.winLoss + "</td>")
+			.append("<td>" + obj.commission + "</td>")
+			.append("<td>" + obj.status + "</td>")
+			$("#historybody").append(tr);
 		});
 
-	}
-
-	function Login(){
-		var logindata = {username:"g8g8g8g8",password:"qq2222"};
-		var url = 'http://www.isn99.com/membersite-api/api/member/authenticate';
-		$.ajax({
-			type: 'POST',
-			url: url,
-			data:logindata,
-			})
-			.done(function (data) {
-				if(data.success){
-					alert(data.responseMessage);
-				}else{
-					token = data.token;
-				}
-			});
-	}
-
-	function GetHistory(date) {
-		var url = 'http://www.isn99.com/membersite-api/api/statement/list/' + date + '?_=' + new Date();
-
-		$.ajax({
-			type: 'GET',
-			url: url,
-			headers: {
-				"Authorization": "Bearer " + token,
-			}
-		}).done(function (data) {
-			$("#historybody").html("");
-			$.each(data, function (index, obj) {
-				var tr = $("<tr></tr>")
-				.append("<td>" + index + "</td>")
-				.append("<td>" + obj.betDateServer + "<br/>編號:" + obj.betId + "</td>")
-				.append("<td>" + obj.marketTypeName + "</td>")
-				.append("<td>" + obj.leagueName + "<br/>" + obj.eventName + "<br/>" + obj.name + "[" + obj.handicap + "]@" + obj.odds + "</td>")
-				.append("<td>" + obj.stake + "</td>")
-				.append("<td>" + obj.winLoss + "</td>")
-				.append("<td>" + obj.commission + "</td>")
-				.append("<td>" + obj.status + "</td>")
-				$("#historybody").append(tr);
-			});
-
-		});
-	}
-	function MakeGameInfo(obj){
+	});
+}
+function MakeGameInfo(obj){
 
 
 
-	}
+}
 
 
